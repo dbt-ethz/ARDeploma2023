@@ -38,10 +38,8 @@ public class ChangeDisplay : MonoBehaviour
     }
     public void ClickChangeDisplay(TMP_Dropdown myDropDown)
     {
-        TextManager.Instance.debugText.text = "change mats";
-        string name = myDropDown.value.ToString();
-        TextManager.Instance.debugText.text = name;
-        Material mat = (Material)Resources.Load(name);
+        string name = myDropDown.options[myDropDown.value].text;
+        Material mat = Resources.Load(name, typeof(Material)) as Material;
         GameObject parent = GameObject.FindGameObjectWithTag("Model");
         if (parent != null)
         {
@@ -49,6 +47,9 @@ public class ChangeDisplay : MonoBehaviour
             terrain.GetComponent<MeshRenderer>().material = mat;
         }
         else TextManager.Instance.debugText.text = "didnt find material";
+
+        GameObject buildings = Resources.Load<GameObject>(name);
+        Instantiate(buildings, parent.transform);
     }
     public void ClickChangeMat(Material mat)
     {

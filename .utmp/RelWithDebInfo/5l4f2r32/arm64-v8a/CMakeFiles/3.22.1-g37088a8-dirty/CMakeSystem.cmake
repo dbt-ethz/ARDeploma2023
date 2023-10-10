@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Windows-10.0.19045")
+set(CMAKE_HOST_SYSTEM "Windows-10.0.22621")
 set(CMAKE_HOST_SYSTEM_NAME "Windows")
-set(CMAKE_HOST_SYSTEM_VERSION "10.0.19045")
+set(CMAKE_HOST_SYSTEM_VERSION "10.0.22621")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "AMD64")
 
 include("C:/Program Files/Unity/Hub/Editor/2023.2.0b7/Editor/Data/PlaybackEngines/AndroidPlayer/NDK/build/cmake/android.toolchain.cmake")
