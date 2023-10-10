@@ -48,7 +48,11 @@ public class ChangeDisplay : MonoBehaviour
         }
         else TextManager.Instance.debugText.text = "didnt find material";
 
-        Destroy(parent.transform.GetChild(1).gameObject);
+        if(parent.transform.childCount > 0)
+        {
+            Destroy(parent.transform.GetChild(1).gameObject);
+        }
+        Debug.Log(name);
         GameObject buildings = Resources.Load<GameObject>(name);
         Instantiate(buildings, parent.transform);
     }
