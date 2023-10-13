@@ -20,20 +20,18 @@ public class ChangeDisplay : MonoBehaviour
     void OnEnable()
     {
         m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
-        //Application.logMessageReceived += HandleLog;
     }
 
     void OnDisable()
     {
         m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
-       // Application.logMessageReceived -= HandleLog;
     }
 
     void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach (var trackedImage in eventArgs.added)
         {
-            trackedImage.transform.localPosition = new Vector3(trackedImage.transform.localPosition.x, 0.005f, trackedImage.transform.localPosition.z);
+            trackedImage.transform.localRotation = Quaternion.Euler(trackedImage.transform.localRotation.x, 0, trackedImage.transform.localRotation.z);
         }
     }
     public void ClickChangeDisplay(TMP_Dropdown myDropDown)
@@ -54,30 +52,8 @@ public class ChangeDisplay : MonoBehaviour
         }
         Debug.Log(name);
         GameObject buildings = Resources.Load<GameObject>(name);
-        Instantiate(buildings, parent.transform);
-    }
-    public void ClickChangeMat(Material mat)
-    {
-        GameObject parent = GameObject.FindGameObjectWithTag("Model");
-        if (parent != null)
-        {
-            GameObject terrain = parent.transform.GetChild(0).gameObject;
-            terrain.GetComponent<MeshRenderer>().material = mat;
-        }
-        else TextManager.Instance.debugText.text =  "didnt find terrain";
-    }
-    public void OnOffRoad()
-    {
-        GameObject parent = GameObject.FindGameObjectWithTag("Model");
-        if (parent != null)
-        {
-            GameObject road = parent.transform.GetChild(1).gameObject;
-            road.SetActive(!road.activeSelf);
-        }
-        else TextManager.Instance.debugText.text = "didnt find terrain";
-    }
-    private void HandleLog(string logString, string stackTrace, LogType type)
-    {
-        //debugText.text += logString + "\n";
+        GameObject instGo = Instantiate(buildings, parent.transform);
+        instGo.transform.localPosition = new Vector3(0, 0, 0);
+        instGo.transform.localRotation = Quaternion.identity;
     }
 }
